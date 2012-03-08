@@ -1,0 +1,100 @@
+initializing blocks...
+0x7f8698800000	80
+0x7f8698800050	450
+0x7f8698800212	200
+0x7f86988002da	100
+0x7f869880033e	56
+0x7f8698800376	44
+0x7f86988003a2	20
+0x7f86988003b6	50
+0x7f86988003e8	100
+
+Printing free list...
+...free list empty!
+
+********************************
+Freeing block:
+address: 0x7f86988002da	size: 84	next:         0x0	end: 0x7f869880033e
+
+Printing free list...
+1. address: 0x7f86988002da	size: 84	next:         0x0	end: 0x7f869880033e
+********************************
+
+********************************
+Freeing block:
+address: 0x7f8698800050	size: 434	next:         0x0	end: 0x7f8698800212
+
+Printing free list...
+1. address: 0x7f8698800050	size: 434	next: 0x7f86988002da	end: 0x7f8698800212
+2. address: 0x7f86988002da	size: 84	next:         0x0	end: 0x7f869880033e
+********************************
+
+********************************
+Freeing block:
+address: 0x7f86988003b6	size: 34	next:         0x0	end: 0x7f86988003e8
+
+Printing free list...
+1. address: 0x7f8698800050	size: 434	next: 0x7f86988002da	end: 0x7f8698800212
+2. address: 0x7f86988002da	size: 84	next: 0x7f86988003b6	end: 0x7f869880033e
+3. address: 0x7f86988003b6	size: 34	next:         0x0	end: 0x7f86988003e8
+********************************
+
+********************************
+Freeing block:
+address: 0x7f8698800376	size: 28	next:         0x0	end: 0x7f86988003a2
+
+Printing free list...
+1. address: 0x7f8698800050	size: 434	next: 0x7f86988002da	end: 0x7f8698800212
+2. address: 0x7f86988002da	size: 84	next: 0x7f8698800376	end: 0x7f869880033e
+3. address: 0x7f8698800376	size: 28	next: 0x7f86988003b6	end: 0x7f86988003a2
+4. address: 0x7f86988003b6	size: 34	next:         0x0	end: 0x7f86988003e8
+********************************
+
+********************************
+Freeing block:
+address: 0x7f86988003e8	size: 84	next:         0x0	end: 0x7f869880044c
+
+Printing free list...
+1. address: 0x7f8698800050	size: 434	next: 0x7f86988002da	end: 0x7f8698800212
+2. address: 0x7f86988002da	size: 84	next: 0x7f8698800376	end: 0x7f869880033e
+3. address: 0x7f8698800376	size: 28	next: 0x7f86988003b6	end: 0x7f86988003a2
+4. address: 0x7f86988003b6	size: 134	next:         0x0	end: 0x7f869880044c
+********************************
+
+********************************
+Freeing block:
+address: 0x7f8698800000	size: 64	next:         0x0	end: 0x7f8698800050
+
+Printing free list...
+1. address: 0x7f8698800000	size: 514	next: 0x7f86988002da	end: 0x7f8698800212
+2. address: 0x7f86988002da	size: 84	next: 0x7f8698800376	end: 0x7f869880033e
+3. address: 0x7f8698800376	size: 28	next: 0x7f86988003b6	end: 0x7f86988003a2
+4. address: 0x7f86988003b6	size: 134	next:         0x0	end: 0x7f869880044c
+********************************
+
+********************************
+Freeing block:
+address: 0x7f8698800212	size: 184	next:         0x0	end: 0x7f86988002da
+
+Printing free list...
+1. address: 0x7f8698800000	size: 814	next: 0x7f8698800376	end: 0x7f869880033e
+2. address: 0x7f8698800376	size: 28	next: 0x7f86988003b6	end: 0x7f86988003a2
+3. address: 0x7f86988003b6	size: 134	next:         0x0	end: 0x7f869880044c
+********************************
+
+********************************
+Freeing block:
+address: 0x7f869880033e	size: 40	next:         0x0	end: 0x7f8698800376
+
+Printing free list...
+1. address: 0x7f8698800000	size: 914	next: 0x7f86988003b6	end: 0x7f86988003a2
+2. address: 0x7f86988003b6	size: 134	next:         0x0	end: 0x7f869880044c
+********************************
+
+********************************
+Freeing block:
+address: 0x7f86988003a2	size: 4	next:         0x0	end: 0x7f86988003b6
+
+Printing free list...
+1. address: 0x7f8698800000	size: 1084	next:         0x0	end: 0x7f869880044c
+********************************
