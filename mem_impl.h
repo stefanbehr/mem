@@ -22,6 +22,8 @@ block * free_list;
 
 size_t get_size_16(size_t size);
 
+size_t mem_allocated = 0;
+
 void get_mem_stats(size_t *total_size, size_t *total_free, size_t *n_free_blocks);
 
 

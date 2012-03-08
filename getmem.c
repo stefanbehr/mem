@@ -20,7 +20,7 @@ void * getmem(size_t size) {
     free_list = (block *) malloc(CHUNK);
     free_list->size = CHUNK;
     request = partition(free_list, get_size_16(size));
-    
+    mem_allocated = CHUNK;
   } 
   else {
     block * prev;
@@ -50,6 +50,7 @@ void * getmem(size_t size) {
     }
     if (request == NULL) { 
       block * chunk = (block *) malloc(CHUNK);
+      mem_allocated += CHUNK;
       chunk->size = CHUNK;
       block * new = partition(chunk, get_size_16(size));
       size_t addr = (size_t) chunk + get_size_16(size);

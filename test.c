@@ -8,6 +8,7 @@
 #include "getmem.c"
 
 void print_list();
+void print_list_header();
 void basic_free_get(size_t i);
 
 int main() {
@@ -37,18 +38,58 @@ void basic_free_get(size_t i) {
   freemem((void *)b); 
   printf("> Free_list is:\n");
   print_list();
-  /**
-  printf("\n> Making additional memory allocations...\n");
-  printf("> Allocating 900, 200, 100...:")
+  
+  printf("\n> Making the following memory allocations...\n");
   char * c = getmem(900);
   char * d = getmem(200);
   char * e = getmem(100);
-  prinft("%p %d", c);**/
+  printf("%p %d\n", c, (int)get_size_16(900));
+  printf("%p %d\n", d, (int)get_size_16(200));
+  printf("%p %d\n", e, (int)get_size_16(100));
+  
+  printf("\n> Freeing previous allocations, one at a time in reverse order...\n");
+  freemem((void*)e);
+  print_list_header();
+  print_list();
+  freemem((void*)d);
+  print_list_header();
+  print_list();
+  freemem((void*)c);
+  print_list_header();
+  print_list();
+
+  printf("\n> Making the following memory allocations...\n");
+  char * f = getmem(400);
+  char * g = getmem(200);
+  char * h = getmem(300);
+  printf("%p %d\n", c, (int)get_size_16(400));
+  printf("%p %d\n", d, (int)get_size_16(200));
+  printf("%p %d\n", e, (int)get_size_16(300));
   
 
- 
+
+  printf("\n> Freeing the first allocated block,\n");
+  printf("> then the third allocated block, \n");
+  printf("> and then the second allocated block...\n");
+  freemem((void*)f);
+  print_list_header();
+  print_list();
+  freemem((void*)g);
+  print_list_header();
+  print_list();
+  freemem((void*)h);
+  print_list_header();
+  print_list();
+  printf("\n");
+
+
 
 }
+
+void print_list_header() {
+  printf("> Free_list is:\n");
+}
+
 
 void print_list() {
   block * temp = free_list;
