@@ -22,12 +22,11 @@ block * free_list;
 
 size_t get_size_16(size_t size);
 
-size_t mem_allocated = 0;
+size_t mem_allocated;
 
 void get_mem_stats(size_t *total_size, size_t *total_free, size_t *n_free_blocks);
 
 
-int make_random_comparison(double seed, double probability);
 
 block * partition(block * memory_block, size_t size);
 

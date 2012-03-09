@@ -5,8 +5,8 @@
 #include <stdlib.h>
 
 #define NUM_BLOCKS 9
-#define FREEING "Freeing block %d of %d:\n"
-#define BORDER "********************************\n"
+#define FREEING "> Freeing block %d of %d:\n"
+#define BORDER "\n"
 
 void print_free_list();
 void print_block(block *);
@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
 
   // initialize blocks
 
-  printf("initializing blocks...\n");
+  printf("\nInitializing blocks...\n");
   int i;
   void *place_in_chunk = chunk;
   for (i = 0; i < NUM_BLOCKS; i++) {
@@ -32,35 +32,35 @@ int main(int argc, char **argv) {
     printf("%p\t%d\n", place_in_chunk, block_sizes[i]);
     place_in_chunk += block_sizes[i];
   }
+  printf("\n");
 
-  // free list still empty
-  print_free_list();
-
-   // CASE 1: free block onto empty free list
+  printf("> CASE 1: free block onto empty free list\n");
   int bi = NUM_BLOCKS/3; // index into blocks list
   free_and_print(blocks[bi], bi);
 
-  // CASE 2: free block to start of non-empty free list (NO MERGE)
+  printf("> CASE 2: free block to start of non-empty free list (NO MERGE)\n");
   bi -= 2;
   free_and_print(blocks[bi], bi);
 
-  // CASE 3: free block to end of non-empty free list (NO MERGE)
+  printf("> CASE 3: free block to end of non-empty free list (NO MERGE)\n");
   bi += 6;
   free_and_print(blocks[bi], bi);
 
-  // CASE 4: free block between two other freed blocks with which it's not contiguous (NO MERGE)
+  printf("> CASE 4: free block between two other freed blocks with which\n");
+  printf("> it's not contiguous (NO MERGE)\n");
   bi -= 2;
   free_and_print(blocks[bi], bi);
 
-  // CASE 5: free block to end of non-empty free list (MERGE w/left)
+  printf("> CASE 5: free block to end of non-empty free list (MERGE w/left)\n");
   bi += 3;
   free_and_print(blocks[bi], bi);
 
-  // CASE 6: free block to start of n-e free list (MERGE w/right)
+  printf("> CASE 6: free block to start of n-e free list (MERGE w/right)\n");
   bi -= 8;
   free_and_print(blocks[bi], bi);
 
-  // CASES 7, 8, 9: free blocks each go between two blocks with which they're contiguous (MERGE w/left & right)
+  printf("> CASES 7, 8, 9: free blocks each go between two blocks with\n"); 
+  printf("> which they're contiguous (MERGE w/left & right)\n");
   while (bi < 6) {
     bi += 2;
     free_and_print(blocks[bi], bi);
@@ -70,21 +70,18 @@ int main(int argc, char **argv) {
 }
 
 void print_block(block *b) {
-  printf("address: %11p\tsize: %ld\tnext: %11p\tend: %11p\n", b, b->size, b->next, (void *) b + b->size);
+  printf("%p %ld\tnext: %p\tend: %4p\n", b, b->size, b->next, (void *) b + b->size);
 }
 
 void print_free_list() {
-  printf("\nPrinting free list...\n");
+  printf("\n> Printing free list...\n");
   if (free_list == NULL) {
-    printf("...free list empty!\n");
+    printf("NULL\n\n");
   } else {
-    int counter = 1;
     block *current = free_list;
     while (current != NULL) {
-      printf("%d. ", counter);
       print_block(current);
       current = current->next;
-      counter++;
     }
   }
 }
@@ -95,10 +92,10 @@ void * fspace(block *b) {
 }
 
 void free_and_print(block *b, int pos) {
-  printf("\n%s", BORDER);
+  //printf("\n");
   printf(FREEING, pos, NUM_BLOCKS);
   print_block(b);
   freemem(fspace(b));
   print_free_list();
-  printf(BORDER);
+  printf("\n");
 }

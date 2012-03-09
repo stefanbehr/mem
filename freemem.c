@@ -32,11 +32,9 @@ void freemem(void *p) {
     while (current != NULL) {
       if (free_block < current) {
 	free_block->next = current;
-	if (prev != NULL) {
-	  // insert free block between previous and current blocks
+	if (prev != NULL) { // insert between prev and current blocks
 	  prev->next = free_block;
-	} else {
-	  // insert free block at beginning of free list
+	} else { // insert at beginning of list
 	  free_list = free_block;
 	}
 	break;
@@ -45,26 +43,23 @@ void freemem(void *p) {
 	current = current->next;
       }
     }
-    // post: current is either NULL (free_block goes to end of free list),
-    // or not, and we broke out of loop (prev may be NULL)
-    if (current == NULL) {
-      // insert free block at end of free list
-      prev->next = free_block;
+    
+    if (current == NULL) { // insert block at the end of the list
+      prev->next = free_block; 
     }
-    // merge adjacent blocks in free list if exist and contiguous:
-    if (current != NULL) {
+    if (current != NULL) { 
       void *end_of_free_block = (void *) free_block + free_block->size;
-      if (end_of_free_block == (void *) current) {
-	// merge free block w/block to right
-	free_block->size = free_block->size + current->size;
+      int is_adjacent = end_of_free_block == (void *) current;
+      if (is_adjacent) { // merge right
+	free_block->size = free_block->size + current->size; 
 	free_block->next = current->next;
       }
     }
     if (prev != NULL) {
       void *end_of_prev_block = (void *) prev + prev->size;
-      if (end_of_prev_block == (void *) free_block) {
-	// merge free block w/block to left
-	prev->size = prev->size + free_block->size;
+      int is_adjacent = end_of_prev_block == (void *) free_block;
+      if (is_adjacent) { // merge left
+	prev->size = prev->size + free_block->size; 
 	prev->next = free_block->next;
       }
     }

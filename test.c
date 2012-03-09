@@ -82,8 +82,6 @@ void basic_free_get(size_t i) {
   print_list();
   printf("\n");
 
-
-
 }
 
 void print_list_header() {
