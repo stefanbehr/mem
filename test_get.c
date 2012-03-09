@@ -1,7 +1,15 @@
+/*
+ * filename: test_get.c
+ * group id: q
+ * members: Joshua Andersen, Stefan Behr
+ * project: HW 6, part 1
+ */
+
+/* Tests for getmem.c */
+
 #include "mem.h"
 #include "mem_impl.h"
 #include <stdio.h>
-#include "freemem.c"
 
 void print_list();
 

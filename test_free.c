@@ -1,3 +1,10 @@
+/*
+ * filename: test_free.c
+ * group id: q
+ * members: Joshua Andersen, Stefan Behr
+ * project: HW 6, part 1
+ */
+
 /* Tests for freemem.c */
 
 #include "mem_impl.h"

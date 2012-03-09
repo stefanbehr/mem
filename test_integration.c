@@ -1,11 +1,16 @@
 /*
- * Sanity tests.
+ * filename: test_integration.c
+ * group id: q
+ * members: Joshua Andersen, Stefan Behr
+ * project: HW 6, part 1
+ */
+
+/*
+ * Sanity tests for freemem and getmem together.
  */
 #include <stdio.h>
 #include "mem.h"
 #include "mem_impl.h"
-#include "freemem.c"
-#include "getmem.c"
 
 void print_list();
 void print_list_header();
