@@ -30,6 +30,18 @@ $(PROG): $(PROG).c $(OBJS)
 # $(CC) $(CFLAGS) -c source-file.c
 %.o: %.c $(HDRS)
 
+# test a large instance
+huge: 
+	make bench
+	./bench 10000 20 20
+	make clean
+
+# test a small instance
+tiny:
+	make bench
+	./bench 10000 20 20
+	make clean
+
 # test target, recompiles bench executable if necessary, runs bench with default parameters
 test: bench
 	bench

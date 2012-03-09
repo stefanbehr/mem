@@ -15,14 +15,11 @@
  *  f --
  *    pointer to file to which output is to be written
  */
-void print_heap(FILE *f) {
-
+void print_heap(FILE *file) {
   block * temp = free_list;
-  if (free_list->next != NULL) {
-    free_list->next = NULL;
-  }
-  while (temp != NULL) {; // need to ensure in getmem last element always points to null
-    fprintf(f, "%p %x\n",temp, (int)temp->size);
+  while (temp != NULL) {;
+    fprintf(file, "%p 0x%x\n",temp, (int)temp->size);
     temp = temp->next;
   }
+  fclose(file);
 }
