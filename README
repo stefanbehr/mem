@@ -1,0 +1,80 @@
+README
+Joshua Andersen & Stefan Behr
+CSE 374
+March 8, 2012
+
+===================================================================
+Division of Responsibilities
+-------------------------------------------------------------------
+
+Production code
+    bench.c: Josh/Stefan
+    getmem.c: Josh
+    get_heap_stats.c: Stefan
+    freemem.c: Stefan
+    print_heap.c: Josh
+    Makefile: Stefan
+    README: Josh/Stefan
+
+Test code
+    test_free.c: Stefan
+    test_get.c: Josh
+    test_integration: Josh
+
+===================================================================
+Memory Manager Design
+-------------------------------------------------------------------
+
+The free list of memory blocks is maintained as a linked list. This
+offers O(n) getmem performance. Memory requests are handled by
+traversing the list and returning a pointer to the appropriate
+block. In the event such a block is too large, the front of the
+larger block is partitioned off and allocated to the client. The 
+factor by which a block is determined to be "too large" is 
+defined in mem_impl.h as PARTITION_THRESHOLD.
+
+The linked structure of the free list also offers O(n) freemem 
+performance. Freeing memory blocks back onto the free list is 
+handled by traversing the free list from its head, checking at each 
+link if the block to be freed should go before that link in memory,
+inserting the free block appropriately by changing pointer-to-next
+fields. This keeps the free list sorted at all times.
+
+Merging is achieved in constant time as soon as a free block is 
+inserted into the free list by comparing its boundaries with the 
+blocks to its left and right in the list (if any), and doing the 
+appropriate size and pointer-to-next field adjustments if any 
+blocks in the area are found to be contiguous.
+
+===================================================================
+Functional Testing
+-------------------------------------------------------------------
+
+Test cases identified during planning were enumerated using two
+independent component tests of getmem and freemem. An integration
+test was used to verify interoperability.
+
+All of the aforementioned tests can be compiled simultaneously with:
+    make all_tests
+
+Or individually with:
+   make test_free
+   make test_get
+   make test_integration
+
+===================================================================
+Performance Testing
+-------------------------------------------------------------------
+
+Unfortunately we were unable to assess the performance of the memory 
+manager due to an unresolvable bug in our bench program. Despite 
+dedicating the better part of a day to fixing the issue, which only 
+arose unfortunately recently relative to when we started work on 
+the project, and despite a nice test backbone, we were unable to 
+find the source of the bug.
+
+==================================================================
+References
+-------------------------------------------------------------------
+
+Lecture notes from 2/17/2012 - 2/27/2012
