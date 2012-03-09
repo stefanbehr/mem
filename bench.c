@@ -79,7 +79,7 @@ int main(int argc, char **argv) {
   size_t total_free = 0;
   size_t n_free_blocks = 0;
 
-  int max_get = (int) (pctget * ntrials);
+  int max_get = ntrials;
   void *get_list[max_get];
 
   int count = (int)(.1 * ntrials);

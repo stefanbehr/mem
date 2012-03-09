@@ -19,18 +19,23 @@ void * getmem(size_t size) {
   if (free_list == NULL) {
     free_list = (block *) malloc(CHUNK);
     free_list->size = CHUNK;
-    request = partition(free_list, get_size_16(size));
-    mem_allocated = CHUNK;
+    free_list->next = NULL;
+    request = free_list;
+    free_list = partition(free_list, get_size_16(size));
+    mem_allocated += CHUNK; // this might cause trouble
   } 
   else {
     block * prev;
     block * current = free_list;
     while (current != NULL) {
       if (current->size > size) { 
-	if (current->size * (PARTITION_THRESHOLD) >= size) { 
-	  request = partition(current, get_size_16(size));
+	if ((current->size * (PARTITION_THRESHOLD)) >= (get_size_16(size) + BLOCK_HEADER_SIZE)) { // may also be a problem
+	  // left off editing here
+	  request = current;
+	  block *remainder = partition(current, get_size_16(size));
 	  if (prev != NULL) {
-	    size_t addr = (size_t) current + get_size_16(size);
+	    
+	    // size_t addr = (size_t) current + get_size_16(size);
 	    prev->next = (block *) addr;
 	  }
 	}
@@ -63,7 +68,7 @@ void * getmem(size_t size) {
 }
 
 /*
- * Partitions a memory block and returns a void pointer to the memory partition.
+ * Partitions a memory block and returns a block pointer to the memory partition.
  *
  * Args:
  *   memory_block --
@@ -72,7 +77,15 @@ void * getmem(size_t size) {
  *     the size of the partition
  */
 block * partition(block * memory_block, size_t size) {
-  block * next = memory_block->next;
+  (block *) part2 = (block *) ((void *) memory_block + BLOCK_HEADER_SIZE + size);
+  part2->size = memory_block->size - BLOCK_HEADER_SIZE - size;
+  part2->next = memory_block->next;
+  memory_block->next = NULL;
+  memory_block->size = size;
+  return part2;
+}
+
+  /* block * next = memory_block->next;
   size_t old_size = memory_block->size;
   size_t addr1 = (size_t) memory_block;
   size_t addr2 = (size_t) memory_block + size;
@@ -86,7 +99,7 @@ block * partition(block * memory_block, size_t size) {
     free_list = memory_block;
   }
   return (block *) addr1;
-}
+  */
 
 /*
  * Returns the next highest multiple of 16 from size.

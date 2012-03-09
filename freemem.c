@@ -48,18 +48,18 @@ void freemem(void *p) {
       prev->next = free_block; 
     }
     if (current != NULL) { 
-      void *end_of_free_block = (void *) free_block + free_block->size;
-      int is_adjacent = end_of_free_block == (void *) current;
+      void *end_of_free_block = (void *) free_block + BLOCK_HEADER_SIZE + free_block->size;
+      int is_adjacent = (end_of_free_block == (void *) current);
       if (is_adjacent) { // merge right
-	free_block->size = free_block->size + current->size; 
+	free_block->size = free_block->size + BLOCK_HEADER_SIZE + current->size; 
 	free_block->next = current->next;
       }
     }
     if (prev != NULL) {
-      void *end_of_prev_block = (void *) prev + prev->size;
-      int is_adjacent = end_of_prev_block == (void *) free_block;
+      void *end_of_prev_block = (void *) prev + BLOCK_HEADER_SIZE + prev->size;
+      int is_adjacent = (end_of_prev_block == (void *) free_block);
       if (is_adjacent) { // merge left
-	prev->size = prev->size + free_block->size; 
+	prev->size = prev->size + BLOCK_HEADER_SIZE + free_block->size; 
 	prev->next = free_block->next;
       }
     }
