@@ -29,6 +29,7 @@ void * getmem(size_t size) {
     block * current = free_list;
     while (current != NULL) {
       if (current->size > size) { 
+	// big enough to partition? (must have enough room for request + separate block of min size [16])
 	if ((current->size * (PARTITION_THRESHOLD)) >= (get_size_16(size) + BLOCK_HEADER_SIZE)) { // may also be a problem
 	  // left off editing here
 	  request = current;
